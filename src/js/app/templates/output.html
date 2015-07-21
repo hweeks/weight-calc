@@ -1,0 +1,17 @@
+<h2>Here's Your Plan:</h2>
+<div class="output-table">
+  <section>
+    <output>Week</output>
+    <output>Calories Needed</output>
+    <output>Calories Burned</output>
+    <output>Pounds Lost</output>
+    <output>New Weight</output>
+  </section>
+  {{#table}}
+    <section>
+      {{#.}}
+        <output>{{.}}</output>
+      {{/.}}
+    </section>
+  {{/table}}
+</div>
