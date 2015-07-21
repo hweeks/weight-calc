@@ -4,8 +4,10 @@ define(['jquery', 'underscore', 'backbone', 'Marionette'],
       emptyRoute: function(){
         console.log("No route");
       },
-      aTest: function(){
-        console.log("We can navigate else where.");
+      goToResults: function(input){
+        var decoded = decodeURIComponent(input);
+        var parsed = JSON.parse(input);
+        Backbone.trigger('trigger:results', parsed);
       }
     };
   }

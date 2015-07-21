@@ -1,14 +1,20 @@
-define(['jquery', 'underscore', 'backbone', 'Marionette', 'stache!../templates/input', '../models/main-model'],
-  function ($, _, Backbone, Marionette, InputTemplate, Model) {
+define(['jquery', 'underscore', 'backbone', 'Marionette', 'stache!../templates/input'],
+  function ($, _, Backbone, Marionette, InputTemplate) {
     return MainView = Marionette.LayoutView.extend({
       template: InputTemplate,
       events: {
         'click .get-results': 'buildInput'
       },
+      initialize: function(){
+        this.listenTo(Backbone, 'trigger:results', this.triggeredResults);
+      },
+      triggeredResults: function(input){
+        this.buildOutput(input);
+        Backbone.trigger('show:results', this.model);
+      },
       buildInput: function(){
         var data = {};
         var inputs = this.$el.find('input[type="text"]');
-        this.model = new Model();
         for (var i = inputs.length - 1; i >= 0; i--) {
           var el = $(inputs[i]);
           var key = el.prop('class');
@@ -69,8 +75,11 @@ define(['jquery', 'underscore', 'backbone', 'Marionette', 'stache!../templates/i
         return weeklyTotal;
       },
       validateInput: function(data){
+        var stringed = JSON.stringify(data);
+        var encoded = encodeURIComponent(stringed);
+        Backbone.trigger('navigate', encoded);
         this.buildOutput(data);
-        Backbone.trigger('show:results', this.model)
+        Backbone.trigger('show:results', this.model);
       }
     });
   }

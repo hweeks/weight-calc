@@ -3,7 +3,13 @@ define(['jquery', 'underscore', 'backbone', 'Marionette'],
     return AppRouter = Marionette.AppRouter.extend({
       appRoutes: {
         "": "emptyRoute",
-        "test": "aTest"
+        "*input": "goToResults"
+      },
+      initialize: function(){
+        this.listenTo(Backbone, 'navigate', this.navigateTo);
+      },
+      navigateTo: function(input){
+        this.navigate(input, {trigger:false});
       }
     });
   }

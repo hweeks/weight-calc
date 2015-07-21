@@ -15,7 +15,9 @@ define(['jquery', 'underscore', 'backbone', 'Marionette',
         this.listenTo(Backbone, 'show:results', this.showResults);
       },
       onRender: function(){
-        var inputView = new InputView();
+        var inputView = new InputView({
+          model: this.model
+        });
         this.body.show(inputView);
       },
       showResults: function(modelIn){

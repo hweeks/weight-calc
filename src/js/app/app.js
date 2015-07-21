@@ -1,18 +1,18 @@
-define(['jquery', 'underscore', 'backbone', 'Marionette', 
-  '../app/router', 
-  '../app/controller', 
-  '../app/views/main-view', 
+define(['jquery', 'underscore', 'backbone', 'Marionette',
+  '../app/router',
+  '../app/controller',
+  '../app/views/main-view',
   '../app/models/main-model'],
-  function ($, _, Backbone, Marionette, 
-    Router, 
-    Controller, 
-    MainView, 
+  function ($, _, Backbone, Marionette,
+    Router,
+    Controller,
+    MainView,
     MainModel) {
     return App = Marionette.Application.extend({
       container: '#container',
       initialize: function(){
         var controller = Controller;
-        var router = new Router({
+        this.router = new Router({
           controller: controller
         });
         var model = new MainModel;
